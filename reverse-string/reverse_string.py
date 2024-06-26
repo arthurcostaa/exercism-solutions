@@ -1,3 +1,9 @@
 def reverse(text):
     text = list(text)
-    return text.pop() + reverse(text) if len(text) > 0 else ''
+
+    reversed = []
+
+    while len(text) > 0:
+        reversed.append(text.pop())
+
+    return ''.join(reversed)
