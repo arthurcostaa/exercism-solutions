@@ -1,17 +1,17 @@
 def is_valid(isbn):
-    isbn = isbn.replace('-', '')
+    isbn = list(isbn.replace('-', ''))
 
     if len(isbn) != 10:
         return False
 
-    if 'X' in isbn and not isbn.endswith('X'):
-        return False
+    if isbn[-1] == 'X':
+        isbn[-1] = '10'
 
-    if not isbn.replace('X', '').isnumeric():
+    if not all(n.isdigit() for n in isbn):
         return False
     
     digits_sum = sum(
-        (10 - index) * (int(digit) if digit != 'X' else 10)
+        (10 - index) * int(digit)
         for index, digit in enumerate(isbn)
     )
 
